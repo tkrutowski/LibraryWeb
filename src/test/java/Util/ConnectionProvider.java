@@ -11,14 +11,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionFactory {
+public class ConnectionProvider {
     private static Logger logger = LoggerFactory.getLogger(ConnectionFactory.class);
 
     private  static Properties properties;
     private static MysqlDataSource dataSource = null;
-    //private static final String FILE_NAME="database.properties";
-    private static final String FILE_NAME="database_test.properties"; //TEST
-    //private static final String FILE_NAME="src/main/resources/database_test.properties"; //TEST
+    private static final String FILE_NAME="database_test.properties";
 
 //    public ConnectionFactory() {
 //        this.properties = getDataBaseProperties(FILE_NAME);
@@ -45,7 +43,7 @@ public class ConnectionFactory {
              */
             ClassLoader classLoader =  ConnectionFactory.class.getClassLoader();
 
-                    //this.getClass().getClassLoader();
+            //this.getClass().getClassLoader();
             InputStream propertiesStream = classLoader.getResourceAsStream(filename);
             if (propertiesStream == null) {
                 throw new IllegalArgumentException("Can't find file: " + filename);
@@ -76,12 +74,11 @@ public class ConnectionFactory {
                 dataSource.setServerTimezone("Europe/Warsaw");
                 dataSource.setUseSSL(false);
                 dataSource.setCharacterEncoding("UTF-8");
-
-                logger.info("Connecting to a selected database...");
             } catch (SQLException e) {
                 logger.error("Error during creating MysqlDataSource", e);
             }
         }
+        logger.info("Connecting to a selected database...");
         return dataSource;
     }
 }

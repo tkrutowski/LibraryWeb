@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 public class ConnectionFactoryTest {
-    ConnectionFactory connectionFactory;
+
+
     @Before
     public void setUp() throws Exception {
-        connectionFactory=new ConnectionFactory();
     }
 
     @After
@@ -26,7 +26,18 @@ public class ConnectionFactoryTest {
 
 
         //given
-        Connection result = connectionFactory.getConnection();
+        Connection result = ConnectionFactory.getConnection();
+
+        //then
+        assertNotNull(result);
+    }
+    @Test
+    public void getTestConnection() throws SQLException {
+        //when
+
+
+        //given
+        Connection result = ConnectionProvider.getConnection();
 
         //then
         assertNotNull(result);
