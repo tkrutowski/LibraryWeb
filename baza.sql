@@ -20,6 +20,7 @@ CREATE TABLE `users` (
   CREATE TABLE `bookstores`  (
   `id_bookstore` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `www` VARCHAR(100) NULL,
   PRIMARY KEY (`id_bookstore`));
   
     CREATE TABLE `series` (
@@ -71,3 +72,5 @@ CREATE TABLE `users` (
    FOREIGN KEY (id_author) REFERENCES authors(id_author)
    );
     
+    
+    select * from author;

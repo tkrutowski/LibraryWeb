@@ -8,17 +8,17 @@ import javax.persistence.Persistence;
 
 public class ConnectionProvider {
     private static Logger logger = LoggerFactory.getLogger(ConnectionProvider.class);
-    private static EntityManagerFactory entityManagerFactory;
+    private  EntityManagerFactory entityManagerFactory;
 
     public ConnectionProvider() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("org.example.jpa.starter.lifecycle");
+        entityManagerFactory = Persistence.createEntityManagerFactory("net.focik.Library.model");
     }
 
-    public static EntityManagerFactory getEntityManagerFactory() {
+    public  EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
     }
 
-    public static void close() {
+    public  void close() {
         entityManagerFactory.close();
     }
 }

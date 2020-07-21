@@ -1,0 +1,39 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+    <!-- Początek konfiguracji dla PersistenceUnit o nazwie: 'org.example.jpa.starter.lifecycle' -->
+    <persistence-unit name="net.focik.Library.model">
+        <!-- lista klas do mapowania do bazy danych -->
+        <class>net.focik.Library.model.AuthorEntity</class>
+
+        <!-- domyślnie mechanizmy JPA skanują wszystkie dostępne pakiety i dodają do PU encje które znajdą - ta opcja wyłącza tę funkcjonalność -->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+
+            <!-- ustawienia połączenie do bazy danych -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- url (adres) do bazy danych -->
+            <!-- zobacz komentarz w klasie ConnectionViaDriverManager do DB_URL -->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/library_test?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=Europe/Warsaw"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="enterprise"/>
+
+            <!-- Uwaga - przy nazwach parametrów specyficznych dla Hibernate dodajemy prefix hibernate. !-->
+            <!-- wyświetlamy na konsolę wszystkie zapytania SQL, które wywołuje dla nas Hibernate -->
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!-- http://docs.jboss.org/hibernate/orm/5.0/userguide/html_single/Hibernate_User_Guide.html#configurations-hbmddl -->
+            <!-- opcja 'create' = usuń i odwtórz strukturę bazy danych przy starcie aplikacji, inne opcje: 'create-only', 'create-drop', 'drop', 'none' -->
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+
+            <!-- SQL dialekt -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+        </properties>
+    </persistence-unit>
+
+
+</persistence>

@@ -1,12 +1,14 @@
 package net.focik.Library.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "authors")
@@ -26,9 +28,10 @@ public class AuthorEntity {
 
 
 
-    public AuthorEntity(String firstName, String lastName) {
+    public AuthorEntity(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 }
