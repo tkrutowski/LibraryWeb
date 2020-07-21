@@ -1,9 +1,9 @@
 package net.focik.Library.controller;
 
-import net.focik.Library.dao.CategoryDao;
+import net.focik.Library.dao.CategoryEntityDao;
 import com.google.gson.Gson;
 import net.focik.Library.exceptions.NoEmptyValueException;
-import net.focik.Library.model.Category;
+import net.focik.Library.model.CategoryEntity;
 import net.focik.Library.model.OperationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +20,15 @@ import java.util.List;
 
 @WebServlet("/Category")
 public class CategoryServlet extends HttpServlet {
-    CategoryDao categoryDao;
+    CategoryEntityDao categoryDao;
     private static Logger logger = LoggerFactory.getLogger(CategoryServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
 
         int id = Integer.parseInt(request.getParameter("id"));
-        Category category=(createCategory(request, operation));
-        categoryDao = new CategoryDao();
+        CategoryEntity category=(createCategory(request, operation));
+        categoryDao = new CategoryEntityDao();
 
         switch (operation) {
             case DELETE:
@@ -53,7 +53,7 @@ public class CategoryServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        List<Category> categoryList = createCategoryList(request);
+        List<CategoryEntity> categoryList = createCategoryList(request);
 
         Gson gson = new Gson();
         String authorsJSON = gson.toJson(categoryList);
@@ -66,8 +66,8 @@ public class CategoryServlet extends HttpServlet {
 
     }
 
-    private Category createCategory(HttpServletRequest request, OperationType operationType) {
-        Category category = null;
+    private CategoryEntity createCategory(HttpServletRequest request, OperationType operationType) {
+        CategoryEntity category = null;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String Name = request.getParameter("name");
@@ -83,7 +83,7 @@ public class CategoryServlet extends HttpServlet {
                     }
                     break;
             }
-            category = new Category();
+            category = new CategoryEntity();
             category.setIdCategory(id);
             category.setName(Name);
         } catch (NoEmptyValueException e) {
@@ -93,16 +93,16 @@ public class CategoryServlet extends HttpServlet {
         return category;
     }
 
-    private List<Category> createCategoryList(HttpServletRequest request) {
+    private List<CategoryEntity> createCategoryList(HttpServletRequest request) {
 
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
         int id = Integer.parseInt(request.getParameter("id"));
-        categoryDao = new CategoryDao();
-        List<Category> categories = new ArrayList<>();
+        categoryDao = new CategoryEntityDao();
+        List<CategoryEntity> categories = new ArrayList<>();
 
         switch (operation) {
             case READ_ONE:
-                Category category = categoryDao.readOne(id);
+                CategoryEntity category = categoryDao.readOne(id);
                 categories.add(category);
                 break;
             case READ_ALL:
