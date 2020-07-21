@@ -1,4 +1,4 @@
-package Util;
+package net.focik.Library.Util;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.slf4j.Logger;

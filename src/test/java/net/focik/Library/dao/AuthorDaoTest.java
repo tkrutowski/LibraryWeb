@@ -1,7 +1,6 @@
-package DAO;
+package net.focik.Library.dao;
 
-import Util.ConnectionFactory;
-import Util.ConnectionProvider;
+import net.focik.Library.Util.ConnectionProvider;
 import net.focik.Library.model.Author;
 import org.junit.*;
 import org.slf4j.Logger;

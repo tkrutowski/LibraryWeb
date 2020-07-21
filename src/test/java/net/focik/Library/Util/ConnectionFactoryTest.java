@@ -1,4 +1,4 @@
-package Util;
+package net.focik.Library.Util;
 
 import org.junit.After;
 import org.junit.Before;
