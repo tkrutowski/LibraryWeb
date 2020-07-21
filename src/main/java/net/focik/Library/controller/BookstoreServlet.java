@@ -1,9 +1,9 @@
 package net.focik.Library.controller;
 
-import net.focik.Library.dao.BookstoreDao;
+import net.focik.Library.dao.BookstoreEntityDao;
 import com.google.gson.Gson;
 import net.focik.Library.exceptions.NoEmptyValueException;
-import net.focik.Library.model.Bookstore;
+import net.focik.Library.model.BookstoreEntity;
 import net.focik.Library.model.OperationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +20,15 @@ import java.util.List;
 
 @WebServlet("/Bookstore")
 public class BookstoreServlet extends HttpServlet {
-    BookstoreDao bookstoreDao;
+    BookstoreEntityDao bookstoreDao;
     private static Logger logger = LoggerFactory.getLogger(BookstoreServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
 
         int idAuthor = Integer.parseInt(request.getParameter("id"));
-        Bookstore bookstore=(createBookstore(request, operation));
-        bookstoreDao = new BookstoreDao();
+        BookstoreEntity bookstore=(createBookstore(request, operation));
+        bookstoreDao = new BookstoreEntityDao();
 
         switch (operation) {
             case DELETE:
@@ -53,7 +53,7 @@ public class BookstoreServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        List<Bookstore> bookstoreList = createBookstoreList(request);
+        List<BookstoreEntity> bookstoreList = createBookstoreList(request);
 
         Gson gson = new Gson();
         String bookstoreJSON = gson.toJson(bookstoreList);
@@ -66,8 +66,8 @@ public class BookstoreServlet extends HttpServlet {
 
     }
 
-    private Bookstore createBookstore(HttpServletRequest request, OperationType operationType) {
-        Bookstore bookstore = null;
+    private BookstoreEntity createBookstore(HttpServletRequest request, OperationType operationType) {
+        BookstoreEntity bookstore = null;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
@@ -84,7 +84,7 @@ public class BookstoreServlet extends HttpServlet {
                     }
                     break;
             }
-            bookstore = new Bookstore();
+            bookstore = new BookstoreEntity();
             bookstore.setIdBookStore(id);
             bookstore.setName(name);
             bookstore.setWww(www);
@@ -95,16 +95,16 @@ public class BookstoreServlet extends HttpServlet {
         return bookstore;
     }
 
-    private List<Bookstore> createBookstoreList(HttpServletRequest request) {
+    private List<BookstoreEntity> createBookstoreList(HttpServletRequest request) {
 
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
         int id = Integer.parseInt(request.getParameter("id"));
-        bookstoreDao = new BookstoreDao();
-        List<Bookstore> bookstoreList = new ArrayList<>();
+        bookstoreDao = new BookstoreEntityDao();
+        List<BookstoreEntity> bookstoreList = new ArrayList<>();
 
         switch (operation) {
             case READ_ONE:
-                Bookstore bookstore = bookstoreDao.readOne(id);
+                BookstoreEntity bookstore = bookstoreDao.readOne(id);
                 bookstoreList.add(bookstore);
                 break;
             case READ_ALL:

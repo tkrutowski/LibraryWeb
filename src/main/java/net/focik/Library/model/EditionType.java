@@ -1,5 +1,5 @@
 package net.focik.Library.model;
 
-public enum EdytionType {
+public enum EditionType {
     BOOK, EBOOK, AUDIOBOOK
 }
