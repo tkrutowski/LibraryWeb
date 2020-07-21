@@ -1,8 +1,8 @@
 package net.focik.Library.controller;
 
-import DAO.AuthorDao;
+import net.focik.Library.dao.AuthorDao;
 import com.google.gson.Gson;
-import exceptions.NoEmptyValueException;
+import net.focik.Library.exceptions.NoEmptyValueException;
 import net.focik.Library.model.Author;
 import net.focik.Library.model.OperationType;
 import org.slf4j.Logger;

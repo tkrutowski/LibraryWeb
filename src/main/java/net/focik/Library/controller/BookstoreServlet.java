@@ -1,10 +1,8 @@
 package net.focik.Library.controller;
 
-import DAO.AuthorDao;
-import DAO.BookstoreDao;
+import net.focik.Library.dao.BookstoreDao;
 import com.google.gson.Gson;
-import exceptions.NoEmptyValueException;
-import net.focik.Library.model.Author;
+import net.focik.Library.exceptions.NoEmptyValueException;
 import net.focik.Library.model.Bookstore;
 import net.focik.Library.model.OperationType;
 import org.slf4j.Logger;
@@ -20,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/BookstoreServlet")
+@WebServlet("/Bookstore")
 public class BookstoreServlet extends HttpServlet {
     BookstoreDao bookstoreDao;
     private static Logger logger = LoggerFactory.getLogger(BookstoreServlet.class);
