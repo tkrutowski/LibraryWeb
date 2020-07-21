@@ -3,19 +3,25 @@ package net.focik.Library.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 @Setter
 @Getter
-public class Series {
+@Entity
+@Table
+public class SeriesEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_series")
     private int idSeries;
     private String title;
     private String description;
 
-    public Series(int idSeries, String title, String description) {
-        this.idSeries = idSeries;
+    public SeriesEntity(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
-    public Series() {
+    public SeriesEntity() {
     }
 }

@@ -1,10 +1,10 @@
 package net.focik.Library.controller;
 
-import net.focik.Library.dao.SeriesDao;
+import net.focik.Library.dao.SeriesEntityDao;
 import com.google.gson.Gson;
 import net.focik.Library.exceptions.NoEmptyValueException;
 import net.focik.Library.model.OperationType;
-import net.focik.Library.model.Series;
+import net.focik.Library.model.SeriesEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,15 +20,15 @@ import java.util.List;
 
 @WebServlet("/Series")
 public class SeriesServlet extends HttpServlet {
-    SeriesDao seriesDao;
+    SeriesEntityDao seriesDao;
     private static Logger logger = LoggerFactory.getLogger(SeriesServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
 
         int id = Integer.parseInt(request.getParameter("id"));
-        Series series=(createSeries(request, operation));
-        seriesDao = new SeriesDao();
+        SeriesEntity series=(createSeries(request, operation));
+        seriesDao = new SeriesEntityDao();
 
         switch (operation) {
             case DELETE:
@@ -53,7 +53,7 @@ public class SeriesServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        List<Series> seriesList = createSeriesList(request);
+        List<SeriesEntity> seriesList = createSeriesList(request);
 
         Gson gson = new Gson();
         String seriesJSON = gson.toJson(seriesList);
@@ -66,8 +66,8 @@ public class SeriesServlet extends HttpServlet {
 
     }
 
-    private Series createSeries(HttpServletRequest request, OperationType operationType) {
-        Series series = null;
+    private SeriesEntity createSeries(HttpServletRequest request, OperationType operationType) {
+        SeriesEntity series = null;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String title = request.getParameter("title");
@@ -84,7 +84,7 @@ public class SeriesServlet extends HttpServlet {
                     }
                     break;
             }
-            series = new Series();
+            series = new SeriesEntity();
             series.setIdSeries(id);
             series.setTitle(title);
             series.setDescription(description);
@@ -95,16 +95,16 @@ public class SeriesServlet extends HttpServlet {
         return series;
     }
 
-    private List<Series> createSeriesList(HttpServletRequest request) {
+    private List<SeriesEntity> createSeriesList(HttpServletRequest request) {
 
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
         int id = Integer.parseInt(request.getParameter("id"));
-        seriesDao = new SeriesDao();
-        List<Series> seriesList = new ArrayList<>();
+        seriesDao = new SeriesEntityDao();
+        List<SeriesEntity> seriesList = new ArrayList<>();
 
         switch (operation) {
             case READ_ONE:
-                Series series = seriesDao.readOne(id);
+                SeriesEntity series = seriesDao.readOne(id);
                 seriesList.add(series);
                 break;
             case READ_ALL:
