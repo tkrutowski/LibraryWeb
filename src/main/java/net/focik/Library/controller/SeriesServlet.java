@@ -24,7 +24,7 @@ public class SeriesServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(SeriesServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
+       OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
 
         int id = Integer.parseInt(request.getParameter("id"));
         SeriesEntity series=(createSeries(request, operation));
@@ -32,7 +32,7 @@ public class SeriesServlet extends HttpServlet {
 
         switch (operation) {
             case DELETE:
-                seriesDao.delete(id);
+                seriesDao.deleteById(id);
                 break;
             case UPDATE:
                 if(series != null)
@@ -104,14 +104,11 @@ public class SeriesServlet extends HttpServlet {
 
         switch (operation) {
             case READ_ONE:
-                SeriesEntity series = seriesDao.readOne(id);
+                SeriesEntity series = seriesDao.findById(id);
                 seriesList.add(series);
                 break;
             case READ_ALL:
-                seriesList = seriesDao.readAll();
-                break;
-            case DELETE:
-                seriesDao.delete(id);
+                seriesList = seriesDao.getAll();
                 break;
         }
         return seriesList;

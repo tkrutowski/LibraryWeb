@@ -22,7 +22,7 @@ public class SeriesEntityDao {
           AuthorEntityDao dao=new AuthorEntityDao();
           dao.save(seriesEntity);
       }*/
-    public int save(SeriesEntity seriesEntity) {
+    public int create(SeriesEntity seriesEntity) {
 
         int id = -1;
         try {
