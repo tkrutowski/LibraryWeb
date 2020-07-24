@@ -111,9 +111,6 @@ public class AuthorServlet extends HttpServlet {
             case READ_ALL:
                 authorList = authorDao.getAll();
                 break;
-            case DELETE:
-                authorDao.deleteById(idAuthor);
-                break;
         }
         return authorList;
     }

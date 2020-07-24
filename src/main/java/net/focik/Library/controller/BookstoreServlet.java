@@ -110,9 +110,6 @@ public class BookstoreServlet extends HttpServlet {
             case READ_ALL:
                 bookstoreList = bookstoreDao.getAll();
                 break;
-            case DELETE:
-                bookstoreDao.deleteById(id);
-                break;
         }
         return bookstoreList;
     }
