@@ -22,7 +22,7 @@ public class BookstoreEntityDao {
           BookstoreEntity dao=new AuthorEntityDao();
           dao.save(bookstoreEntity);
       }*/
-    public int save(BookstoreEntity bookstoreEntity) {
+    public int create(BookstoreEntity bookstoreEntity) {
         int id = -1;
         try {
             EntityManager entityManager = provider.getEntityManagerFactory().createEntityManager();

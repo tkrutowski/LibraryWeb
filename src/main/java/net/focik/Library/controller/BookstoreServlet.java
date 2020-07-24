@@ -26,13 +26,13 @@ public class BookstoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OperationType operation = OperationType.valueOf(request.getParameter("operation").toUpperCase());
 
-        int idAuthor = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         BookstoreEntity bookstore=(createBookstore(request, operation));
         bookstoreDao = new BookstoreEntityDao();
 
         switch (operation) {
             case DELETE:
-                bookstoreDao.delete(idAuthor);
+                bookstoreDao.deleteById(id);
                 break;
             case UPDATE:
                 if(bookstore != null)
@@ -85,7 +85,7 @@ public class BookstoreServlet extends HttpServlet {
                     break;
             }
             bookstore = new BookstoreEntity();
-            bookstore.setIdBookStore(id);
+            bookstore.setIdBookstore(id);
             bookstore.setName(name);
             bookstore.setWww(www);
         } catch (NoEmptyValueException e) {
@@ -104,14 +104,14 @@ public class BookstoreServlet extends HttpServlet {
 
         switch (operation) {
             case READ_ONE:
-                BookstoreEntity bookstore = bookstoreDao.readOne(id);
+                BookstoreEntity bookstore = bookstoreDao.findById(id);
                 bookstoreList.add(bookstore);
                 break;
             case READ_ALL:
-                bookstoreList = bookstoreDao.readAll();
+                bookstoreList = bookstoreDao.getAll();
                 break;
             case DELETE:
-                bookstoreDao.delete(id);
+                bookstoreDao.deleteById(id);
                 break;
         }
         return bookstoreList;
