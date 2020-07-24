@@ -18,7 +18,7 @@ public class AuthorEntityDao {
           AuthorEntityDao dao=new AuthorEntityDao();
           dao.save(authorEntity);
       }*/
-    public int save(AuthorEntity authorEntity) {
+    public int create(AuthorEntity authorEntity) {
 
         int id = -1;
         try {

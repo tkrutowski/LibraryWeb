@@ -1,6 +1,5 @@
 package net.focik.Library.dao;
 
-import net.focik.Library.Util.ConnectionProvider;
 import net.focik.Library.model.AuthorEntity;
 import org.junit.After;
 import org.junit.Before;
@@ -8,8 +7,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.Statement;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -44,7 +41,7 @@ public class AuthorEntityDaoTest {
     public void save() {
         AuthorEntity authorEntity = new AuthorEntity(8,"Tom","Kru");
 
-        int result = dao.save(authorEntity);
+        int result = dao.create(authorEntity);
 
         assertNotEquals(-1,result);
         assertEquals(10,result);
