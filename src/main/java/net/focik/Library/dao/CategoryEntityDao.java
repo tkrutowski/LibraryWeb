@@ -20,7 +20,7 @@ public class CategoryEntityDao {
           AuthorEntityDao dao=new AuthorEntityDao();
           dao.save(categoryEntity);
       }*/
-    public int save(CategoryEntity categoryEntity) {
+    public int create(CategoryEntity categoryEntity) {
 
         int id = -1;
         try {

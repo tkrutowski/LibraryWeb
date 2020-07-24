@@ -32,7 +32,7 @@ public class CategoryServlet extends HttpServlet {
 
         switch (operation) {
             case DELETE:
-                categoryDao.delete(id);
+                categoryDao.deleteById(id);
                 break;
             case UPDATE:
                 if(category != null)
@@ -82,6 +82,9 @@ public class CategoryServlet extends HttpServlet {
                         throw new NoEmptyValueException();
                     }
                     break;
+                case DELETE:
+                    categoryDao.deleteById(id);
+                    break;
             }
             category = new CategoryEntity();
             category.setIdCategory(id);
@@ -102,14 +105,11 @@ public class CategoryServlet extends HttpServlet {
 
         switch (operation) {
             case READ_ONE:
-                CategoryEntity category = categoryDao.readOne(id);
+                CategoryEntity category = categoryDao.findById(id);
                 categories.add(category);
                 break;
             case READ_ALL:
-                categories = categoryDao.readAll();
-                break;
-            case DELETE:
-                categoryDao.delete(id);
+                categories = categoryDao.getAll();
                 break;
         }
         return categories;
