@@ -29,7 +29,7 @@ public class BookEntityDao {
             //przechodzi do stanu persistent - zostaje nadane id
             entityManager.persist(bookEntity);
             //pobieramy to id
-            id = bookEntity.getIdBookstore();
+            id = bookEntity.getIdBook();
             //zapisujemy zmiany w bazie
             entityManager.getTransaction().commit();
             logger.info("Added to database: {}", bookEntity.toString());

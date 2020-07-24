@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserEntityDao {
-    private static Logger logger = LoggerFactory.getLogger(AuthorEntityDao.class);
+    private static Logger logger = LoggerFactory.getLogger(UserEntityDao.class);
     ConnectionProvider provider = new ConnectionProvider();
 
     /*  public static void main(String[] args) {

@@ -2,11 +2,13 @@ package net.focik.Library.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Setter
 @Getter
+@ToString
 @Entity
 @Table(name = "categories")
 public class CategoryEntity {

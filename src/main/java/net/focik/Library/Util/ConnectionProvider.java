@@ -11,7 +11,7 @@ public class ConnectionProvider {
     private  EntityManagerFactory entityManagerFactory;
 
     public ConnectionProvider() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("net.focik.Library.model");
+        entityManagerFactory = Persistence.createEntityManagerFactory("net.focik.Library");
     }
 
     public  EntityManagerFactory getEntityManagerFactory() {

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,22 +17,40 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_book")
     private int idBook;
-    @Column(name = "id_user")
-    private int idUser;
-    @Column(name = "id_bookstore")
-    private int idBookstore;
-    @Column(name = "id_series")
-    private int idSeries;
-    private Set<Integer> authorList;//dodać join
-    @Column(name = "id_book")
-    private Set<Integer> categoryList;//dodać join
+    //private int idUser;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_bookstore")
+    //private int idBookstore;
+    BookstoreEntity bookstore;
+
+    @ManyToOne
+    @JoinColumn(name = "id_series")
+    //private int idSeries;
+    private SeriesEntity series;
+
+    @ManyToMany()
+    @JoinTable(name = "books_authors",
+            joinColumns = {@JoinColumn(name ="id_book")},
+            inverseJoinColumns = {@JoinColumn(name ="id_author")})
+    private Set<AuthorEntity> authors = new HashSet<>();
+
+    @ManyToMany()//cascade = {CascadeType.ALL})
+    @JoinTable(name = "books_categories",
+            joinColumns = {@JoinColumn(name ="id_book")},
+            inverseJoinColumns = {@JoinColumn(name ="id_category")})
+   private Set<CategoryEntity> categories = new HashSet<>();
+
     private String title;
     private String subtitle;
     private String description;
     private String cover;
     @Column(name = "edition_type")
     private EditionType editionType;
-    @Column(name = "reading_status")
+   @Column(name = "reading_status")
     private ReadingStatus readingStatus;
     @Column(name = "ownership_status")
     private OwnershipStatus ownershipStatus;
@@ -43,4 +62,11 @@ public class BookEntity {
     @Column(name = "is_read")
     private boolean isRead;
 
+    public void addAuthor(AuthorEntity author){
+        authors.add(author);
+    }
+
+    public void addCategory(CategoryEntity category){
+        categories.add(category);
+    }
 }

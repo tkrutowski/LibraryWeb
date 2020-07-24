@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,8 @@ public class UserEntity {
     private String name;
     @Column(name = "is_admin")
     boolean isAdmin;
+    //@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)//relacja dwukierunkowa
+    //private Set<BookEntity> books;
 
     public UserEntity() {
     }

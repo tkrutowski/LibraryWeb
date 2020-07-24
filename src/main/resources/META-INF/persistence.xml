@@ -3,9 +3,14 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
     <!-- Początek konfiguracji dla PersistenceUnit o nazwie: 'org.example.jpa.starter.lifecycle' -->
-    <persistence-unit name="net.focik.Library.model">
+    <persistence-unit name="net.focik.Library">
         <!-- lista klas do mapowania do bazy danych -->
         <class>net.focik.Library.model.AuthorEntity</class>
+        <class>net.focik.Library.model.UserEntity</class>
+        <class>net.focik.Library.model.BookEntity</class>
+        <class>net.focik.Library.model.BookstoreEntity</class>
+        <class>net.focik.Library.model.SeriesEntity</class>
+        <class>net.focik.Library.model.CategoryEntity</class>
 
         <!-- domyślnie mechanizmy JPA skanują wszystkie dostępne pakiety i dodają do PU encje które znajdą - ta opcja wyłącza tę funkcjonalność -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
